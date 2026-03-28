@@ -1,14 +1,7 @@
-import os
-import subprocess
+from fastapi import FastAPI
 
-port = int(os.environ.get("PORT", 8000))
+app = FastAPI()
 
-subprocess.Popen([
-    "streamlit", "run", "app.py",
-    "--server.port", str(port),
-    "--server.address", "0.0.0.0"
-])
-
-def app(environ, start_response):
-    start_response('200 OK', [('Content-Type', 'text/plain')])
-    return [b"Streamlit app is running"]
+@app.get("/")
+def home():
+    return {"message": "ServerBasket AI Running 🚀"}
